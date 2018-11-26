@@ -1,28 +1,17 @@
 'use strict'
 
+const mongoose = require ('mongoose');
+
+let model;
+
 class ClientController{
   constructor(app){
     app.get('/clients', this.findAll);
+    model = mongoose.model("Client");
   }
 
-  findAll(req, res){
-    res.json( [
-      {
-        name: "Andre Souza",
-        email: "andre_Smiths@outlook.clom",
-        cpf: 35198862060
-      },
-      {
-        name: "Barbara Souza",
-        email: "babi_Smiths@outlook.clom",
-        cpf: 35198862060
-      },
-      {
-        name: "Eduardo Souza",
-        email: "eduardo_Smiths@outlook.clom",
-        cpf: 35198862060
-      }
-    ])
+  async findAll(req, res){
+    res.json(await model.find());
   }
 };
 

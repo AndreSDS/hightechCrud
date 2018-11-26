@@ -5,20 +5,22 @@ const mongoose = require ("mongoose");
 const Express = require ('express');
 //importa arquivo client-controller.js
 const ClientController = require('./controller/client-controller');
+//importa arquivo client.js - models
+const Client = require('./model/client.js')
+
 
 //classe servidor
 class Server {
   constructor(){
     //instância do express
     this.app = new Express();
+
     //conectar com db mlab
     mongoose.connect('mongodb://rammpk:rammpk5@ds231133.mlab.com:31133/hightechcrud');
 
-    const Cat = mongoose.model('Cat', {name: String });
+    //registrar os modelos - criar collections
+    new Client();
 
-    const kitty = new Cat({name: "andre"});
-    kitty.save().then( () => console.log("Cheguei")).catch( (err) => {throw err});
-    
     //intancia o ClientController
     this.ClientController = new ClientController(this.app);
 
