@@ -6,7 +6,7 @@ class Client {
             name: String,
             email: String,
             zipcode: String,
-            stree: String,
+            street: String,
             neighborhood: String,
             city: String,
             state: String
