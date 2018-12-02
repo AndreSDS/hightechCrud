@@ -5,6 +5,8 @@ const mongoose = require ("mongoose");
 const bodyParser = require('body-parser');
 //import express
 const Express = require ('express');
+//importar cors
+const cors = require('cors');
 //importa arquivo client-controller.js
 const ClientController = require('./controller/client-controller');
 //importa arquivo client.js - models
@@ -20,6 +22,13 @@ class Server {
     //configura boydy-parser
     this.app.use(bodyParser.json());
 
+    //configurando cors
+    this.app.use((req, res, next) => {
+      res.header("Acccess-Control-Allow-Origin", "*");
+      res.header("Acccess-Control-Allow-Methods", "GET, PUT, DELETE, POST");
+      res.header("Acccess-Control-Allow-Headers", "Origin, X-Request-With, Content-Type, Authorization");
+      next();
+    });
     //conectar com db mlab
     mongoose.connect('mongodb://rammpk:rammpk5@ds231133.mlab.com:31133/hightechcrud');
 
