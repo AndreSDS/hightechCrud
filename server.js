@@ -23,14 +23,10 @@ class Server {
     this.app.use(bodyParser.json());
 
     //configurando cors
-    this.app.use((req, res, next) => {
-      res.header("Acccess-Control-Allow-Origin", "*");
-      res.header("Acccess-Control-Allow-Methods", "GET, PUT, DELETE, POST");
-      res.header("Acccess-Control-Allow-Headers", "Origin, X-Request-With, Content-Type, Authorization");
-      next();
-    });
+    this.app.use(cors());
+    
     //conectar com db mlab
-    mongoose.connect('mongodb://rammpk:rammpk5@ds231133.mlab.com:31133/hightechcrud');
+    mongoose.connect('mongodb://rammpk:rammpk5@ds231133.mlab.com:31133/hightechcrud', { useNewUrlParser: true });
 
     //registrar os modelos - criar collections
     new Client();
@@ -38,7 +34,7 @@ class Server {
     //intancia o ClientController
     this.ClientController = new ClientController(this.app);
 
-    this.app.listen(8081);
+    this.app.listen(3000);
   }
 }
 

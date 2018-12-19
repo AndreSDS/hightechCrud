@@ -24,12 +24,12 @@ class ClientController{
 
   async update(req, res){
     let client = req.body;
-    res.json(await model.update({_id: client._id}, client));
+    res.json(await model.updateOne({_id: client._id}, client));
   }
 
   async remove(req, res){
     let id = req.body._id;
-    res.json(await model.remove({_id: id}));
+    res.json(await model.deleteOne({_id: id}));
   }
 };
 
