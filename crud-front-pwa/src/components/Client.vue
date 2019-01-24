@@ -72,7 +72,7 @@
       v-model ="snackbar.show"
       >
         {{ snackbar.text }}
-      <v-btn flat color="pink" @click.native="snackbar.show = false">Close</v-btn>
+      <v-btn flat color="pink" @click.native="snackbar.show = false">Fechar</v-btn>
     </v-snackbar>
   </v-container>
 </template>
@@ -108,7 +108,7 @@ export default {
       },
         async findAll(){
           try{
-            let resp = await axios.get('http://localhost:3000/clients');
+            let resp = await axios.get(this.$store.state.apiLink + '/clients');
             this.clients = resp.data;
           }catch(error){
               alert("Falha ao ao carregar clientes.");
@@ -119,9 +119,9 @@ export default {
           this.saving = true;
             try {
               if (this.client._id) {
-                let resp = await axios.put("http://localhost:3000/clients", this.client);
+                let resp = await axios.put(this.$store.state.apiLink +"/clients", this.client);
               } else {
-                let resp = await axios.post("http://localhost:3000/clients", this.client); 
+                let resp = await axios.post(this.$store.state.apiLink +"/clients", this.client); 
               }
               this.findAll();
               this.clean();
@@ -139,7 +139,7 @@ export default {
         async remove(_id){
           try {
             if (confirm("Deseja remover este cliente?")) {
-              await axios.delete("http://localhost:3000/clients", {data:{_id: _id}});
+              await axios.delete(this.$store.state.apiLink +"/clients", {data:{_id: _id}});
             this.findAll();
             }
           } catch (error) {
